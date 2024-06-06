@@ -61,3 +61,7 @@ Du kannst jetzt je nach Usecase diese Datei mit HTMl Füllen, und z.B. Buttons o
 </body>
 </html>
 ```
+
+4. Jetzt kannst du die Datei speichern und im Browser öffnen. Dazu musst du in der URL "localhost/index.php" eingeben.
+
+5. Wenn du die Startseite siehst, hast du alles richtig gemacht.
