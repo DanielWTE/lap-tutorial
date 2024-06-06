@@ -42,3 +42,22 @@ try {
 
 Dieser Code verbindet dich mit der Datenbank. Du musst die Variablen $db, $user und $password anpassen. $db ist der Name der Datenbank, $user ist der Benutzername und $password ist das Passwort.
 
+3. Jetzt erstellst du eine neue Datei mit dem Namen "index.php". Das wird unsere Startseite.
+
+Du kannst in VSCode wenn du ein "!" + Tab drückst, automatisch eine HTML Struktur erstellen lassen.
+
+Du kannst jetzt je nach Usecase diese Datei mit HTMl Füllen, und z.B. Buttons oder Links einfügen. Hier ein Beispiel:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Willkommen auf der Startseite</h1>
+</body>
+</html>
+```
