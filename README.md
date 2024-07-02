@@ -1,4 +1,17 @@
-
+# Inhaltsverzeichnis
+- [Setup](#setup)
+    - [1 XAMPP Installieren](#1-xampp-installieren)
+    - [2 MySQL Workbench Installieren](#2-mysql-workbench-installieren)
+    - [3 Visual Studio Code Installieren](#3-visual-studio-code-installieren)
+- [Datenbanken](#datenbanken)
+    - [1. Connection zur Datenbank herstellen](#1-connection-zur-datenbank-herstellen)
+    - [2. ER Modell Erstellen](#2-er-modell-erstellen)
+    - [3. SQL Script Erstellen](#3-sql-script-erstellen)
+- [PHP](#php)
+    - [1. VS Code Extensions](#1-vs-code-extensions)
+    - [2. Projekt Setup](#2-projekt-setup)
+    - [3. Projekt Basis Erstellen](#3-projekt-basis-erstellen)
+    - [4. Daten mit PDO aus der Datenbank abrufen und in einer Tabelle anzeigen](#4-daten-mit-pdo-aus-der-datenbank-abrufen-und-in-einer-tabelle-anzeigen)
 
 # Setup
 ## 1 XAMPP Installieren
