@@ -45,6 +45,8 @@ Jetzt kannst du Tabellen erstellen und Beziehungen zwischen den Tabellen erstell
 4. Füge jetzt das Script ohne "VISIBLE" in MySQL Workbench ein und führe es aus.
 
 # PHP
+Beispielcode für eine einfache PHP Anwendung:
+[DanielWTE/PHP-User-Crud-Example](https://github.com/DanielWTE/php-user-crud-example)
 
 ## 1. VS Code Extensions
 - [All In one PHP Support Extension Package](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode)
