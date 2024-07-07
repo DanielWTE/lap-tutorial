@@ -1,0 +1,135 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Arztpraxis`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Arztpraxis` (
+  `idArztpraxis` INT NOT NULL,
+  `Arztpraxiscol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idArztpraxis`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Sozialversicherung`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Sozialversicherung` (
+  `idSozialversicherungnr` INT NOT NULL,
+  `Sozialversicherungcol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idSozialversicherungnr`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Patienten`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Patienten` (
+  `idPatienten` INT NOT NULL,
+  `Sozialversicherungsnummer` VARCHAR(45) NULL,
+  `Arztpraxis_idArztpraxis` INT NOT NULL,
+  `Sozialversicherung_idSozialversicherung` INT NOT NULL,
+  PRIMARY KEY (`idPatienten`, `Arztpraxis_idArztpraxis`, `Sozialversicherung_idSozialversicherung`),
+  INDEX `fk_Patienten_Arztpraxis_idx` (`Arztpraxis_idArztpraxis` ASC) ,
+  INDEX `fk_Patienten_Sozialversicherung1_idx` (`Sozialversicherung_idSozialversicherung` ASC) ,
+  CONSTRAINT `fk_Patienten_Arztpraxis`
+    FOREIGN KEY (`Arztpraxis_idArztpraxis`)
+    REFERENCES `mydb`.`Arztpraxis` (`idArztpraxis`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Patienten_Sozialversicherung1`
+    FOREIGN KEY (`Sozialversicherung_idSozialversicherung`)
+    REFERENCES `mydb`.`Sozialversicherung` (`idSozialversicherungnr`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Termine`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Termine` (
+  `idTermine` INT NOT NULL,
+  `Terminecol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idTermine`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Befunde`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Befunde` (
+  `idBefunde` INT NOT NULL,
+  `Befundecol` VARCHAR(45) NOT NULL,
+  `Patienten_idPatienten` INT NOT NULL,
+  `Patienten_Arztpraxis_idArztpraxis` INT NOT NULL,
+  `Patienten_Sozialversicherung_idSozialversicherung` INT NOT NULL,
+  `Termine_idTermine` INT NOT NULL,
+  PRIMARY KEY (`idBefunde`, `Patienten_idPatienten`, `Patienten_Arztpraxis_idArztpraxis`, `Patienten_Sozialversicherung_idSozialversicherung`, `Termine_idTermine`),
+  INDEX `fk_Befunde_Patienten1_idx` (`Patienten_idPatienten` ASC, `Patienten_Arztpraxis_idArztpraxis` ASC, `Patienten_Sozialversicherung_idSozialversicherung` ASC) ,
+  INDEX `fk_Befunde_Termine1_idx` (`Termine_idTermine` ASC) ,
+  CONSTRAINT `fk_Befunde_Patienten1`
+    FOREIGN KEY (`Patienten_idPatienten` , `Patienten_Arztpraxis_idArztpraxis` , `Patienten_Sozialversicherung_idSozialversicherung`)
+    REFERENCES `mydb`.`Patienten` (`idPatienten` , `Arztpraxis_idArztpraxis` , `Sozialversicherung_idSozialversicherung`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Befunde_Termine1`
+    FOREIGN KEY (`Termine_idTermine`)
+    REFERENCES `mydb`.`Termine` (`idTermine`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Medikamente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Medikamente` (
+  `idMedikamente` INT NOT NULL,
+  `Medikamentecol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idMedikamente`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Befunde_has_Medikamente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Befunde_has_Medikamente` (
+  `Befunde_idBefunde` INT NOT NULL,
+  `Befunde_Patienten_idPatienten` INT NOT NULL,
+  `Befunde_Patienten_Arztpraxis_idArztpraxis` INT NOT NULL,
+  `Befunde_Patienten_Sozialversicherung_idSozialversicherung` INT NOT NULL,
+  `Medikamente_idMedikamente` INT NOT NULL,
+  `Dosierung` VARCHAR(45) NULL,
+  PRIMARY KEY (`Befunde_idBefunde`, `Befunde_Patienten_idPatienten`, `Befunde_Patienten_Arztpraxis_idArztpraxis`, `Befunde_Patienten_Sozialversicherung_idSozialversicherung`, `Medikamente_idMedikamente`),
+  INDEX `fk_Befunde_has_Medikamente_Medikamente1_idx` (`Medikamente_idMedikamente` ASC) ,
+  INDEX `fk_Befunde_has_Medikamente_Befunde1_idx` (`Befunde_idBefunde` ASC, `Befunde_Patienten_idPatienten` ASC, `Befunde_Patienten_Arztpraxis_idArztpraxis` ASC, `Befunde_Patienten_Sozialversicherung_idSozialversicherung` ASC) ,
+  CONSTRAINT `fk_Befunde_has_Medikamente_Befunde1`
+    FOREIGN KEY (`Befunde_idBefunde` , `Befunde_Patienten_idPatienten` , `Befunde_Patienten_Arztpraxis_idArztpraxis` , `Befunde_Patienten_Sozialversicherung_idSozialversicherung`)
+    REFERENCES `mydb`.`Befunde` (`idBefunde` , `Patienten_idPatienten` , `Patienten_Arztpraxis_idArztpraxis` , `Patienten_Sozialversicherung_idSozialversicherung`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Befunde_has_Medikamente_Medikamente1`
+    FOREIGN KEY (`Medikamente_idMedikamente`)
+    REFERENCES `mydb`.`Medikamente` (`idMedikamente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
