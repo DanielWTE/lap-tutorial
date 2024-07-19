@@ -53,6 +53,9 @@ Beispielcode für eine einfache PHP Anwendung:
 Code mit einer Suche und anderen Funktionen:
 [Edoo1709/Lap-Hilfe](https://github.com/Edoo1709/lap-hilfe)
 
+Noch ein gutes Beispiel:
+[Cryowa/Lap](https://github.com/cryowa/lap)
+
 ## 1. VS Code Extensions
 - [All In one PHP Support Extension Package](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode)
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
